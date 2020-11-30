@@ -37,3 +37,9 @@
     transform: translateY(0px)
   }
 }
+/*@import 'antd/dist/antd.css';*/
+@import '~antd/dist/antd.css';
+
+.card__item, .pointer {
+  cursor: pointer;
+}
