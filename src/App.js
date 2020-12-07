@@ -8,7 +8,6 @@ import {NewsPage} from "./components/NewsPage";
 
 function App() {
 
-
     return (
         <Layout>
             <Content style={{padding: '0 50px'}}>

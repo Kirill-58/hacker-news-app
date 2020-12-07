@@ -43,3 +43,20 @@
 .card__item, .pointer {
   cursor: pointer;
 }
+.news_cards__item  {
+  margin: 15px auto;
+  max-width: 350px;
+  width: 100%;
+}
+.time {
+  margin-left: 50px;
+  margin-top: 5px;
+}
+.news_body, .comment_body {
+  width: 92%;
+  margin: 15px auto;
+}
+.ant-card-actions > li {
+  text-align: left;
+  margin-left: 25px;
+}

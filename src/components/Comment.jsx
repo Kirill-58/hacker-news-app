@@ -1,39 +1,37 @@
 import React from "react";
-import {Avatar, Comment} from "antd";
+import {Avatar, Comment as AntComment} from "antd";
 import {useDispatch} from "react-redux";
-import {getCommentsListAsync} from "../features/redux/newsSlice";
+import {getCommentKidsAsync} from "../redux/newsSlice";
+import {Comments} from "./Comments";
 
 
-export const CommentElem = ({comments}) => {
+export const Comment = ({comment}) => {
     const dispatch = useDispatch();
-    const showKidsComments = (kids)=> {
-        if (kids) {
-            dispatch(getCommentsListAsync(kids))
+    const [clicked, setClicked] = React.useState(false);
+    const handleShowCommentKids = (kids)=> {
+         setClicked(true);
+        if (isFinite(kids[0])) {
+            dispatch(getCommentKidsAsync(kids))
         }
-        else return;
     }
-
-
-        let commentsElems = comments.map(comment => <Comment key={comment.id}
-                                                             actions={[<span
-                                                                 key="comment-nested-reply-to">Reply to</span>]}
-                                                             author={<span>{comment.by}</span>}
-                                                             avatar={
-                                                                 <Avatar
-                                                                     src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-                                                                     alt="Han Solo"
-                                                                 />
-                                                             }
-                                                             content={comment.text}
-                                                             className={comment.kids && 'pointer'}
-                                                             onClick = {()=>comment.kids && showKidsComments(comment.kids)}
-
+    if (comment.delete) return <p>Комментарий был удален</p>
+    return (
+        <AntComment key={comment.id}
+                 actions={[<span
+                     key="comment-nested-reply-to">Reply to</span>]}
+                 author={<span>{comment.by}</span>}
+                 avatar={
+                     <Avatar
+                         src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+                         alt="Han Solo"
+                     />
+                 }
+                 content={comment.text}
+                 className={comment.kids && 'pointer'}
+                 onClick = {()=>comment.kids && handleShowCommentKids(comment.kids)}
         >
-        </Comment>)
-        return (
-            <div>
-                {commentsElems}
-            </div>
-        )
+            {comment.kids && clicked && <Comments comments={comment.kids}/>}
+        </AntComment>
+    )
 
 }
