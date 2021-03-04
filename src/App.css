@@ -37,12 +37,12 @@
     transform: translateY(0px)
   }
 }
-/*@import 'antd/dist/antd.css';*/
 @import '~antd/dist/antd.css';
 
-.card__item, .pointer {
+.card__item, .have-children {
   cursor: pointer;
 }
+
 .news_cards__item  {
   margin: 15px auto;
   max-width: 350px;
